@@ -58,10 +58,10 @@ export default function Cadastro() {
     return (
         <Flex
             as="main"
-            bg="white"
-            minW="40vw"
-           
+            bg="black"
+            minW="40vw" 
             padding={8}
+            color="white" 
             borderRadius="10px"
             direction="column"
             boxShadow="0 8px 32px rgba(0,0,0,0.2)"

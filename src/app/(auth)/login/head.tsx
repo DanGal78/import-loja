@@ -1,7 +1,7 @@
 export default function Head(){
-    return(
+    return (
         <>
-        <title>Cadastro | Import Shop</title>
+        <title>Login | Import Shop</title>
         </>
     )
 }
