@@ -1,11 +1,11 @@
 import { formataMoeda } from "@/helpers/formataMoeda"
-import { Produtos } from "@/services/produtoService"
+import { Produto } from "@/services/produtoService"
 import { Card, CardBody, Heading, Stack, Text, Image } from "@chakra-ui/react"
 
 import { FC } from "react"
 
  export interface CardProdutosProps{
-    produto: Produtos
+    produto: Produto
     handleOpenModal: (id: string) => void
 }
 

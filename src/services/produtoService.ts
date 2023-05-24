@@ -1,6 +1,6 @@
 import { Loja } from "./lojasService";
 
-export interface Produtos{
+export interface Produto{
     id: string
     nome: string
     descricao: string
@@ -8,7 +8,7 @@ export interface Produtos{
     imagem: string
 }
 
-export function getProdutos(): Produtos[] { 
+export function getProdutos(): Produto[] { 
     return [
         {
             id: "1",
@@ -41,11 +41,11 @@ export function getProdutos(): Produtos[] {
     ]
 }
 
-export function getProduto(id: string): Produtos | undefined {
+export function getProduto(id: string): Produto | undefined {
     return getProdutos().find((produtos) => produtos.id === id)
 }
 export function updateProdutos<DataForm>
-(id: number | string, produtos: DataForm): Produtos { 
+(id: number | string, produtos: DataForm): Produto { 
     return{
         id: "1",
         nome: "Camiseta",
@@ -55,7 +55,7 @@ export function updateProdutos<DataForm>
     
     }
    }
-   export function createProduto<DataForm>(produtos: DataForm): Produtos {
+   export function createProduto<DataForm>(produtos: DataForm): Produto {
     return{
         id: "1",
         nome: "Camiseta",
