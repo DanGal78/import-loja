@@ -2,6 +2,10 @@ import { Link } from "@chakra-ui/next-js";
 import { Button, Flex, Heading, Image,} from "@chakra-ui/react";
 import { FC } from "react";
 import { Menu } from '../Menu'
+import { useAuth } from '@/contexts/AuthContext';
+import { UserMenu } from '../UserMenu';
+import { CheckoutButton } from '../CheckoutButton';
+
 
 
 
@@ -33,12 +37,21 @@ export const Header: FC<HeaderProps> = ({isOpen, onToggle}) => {
         </Heading>
        
       </Link>
+
      
       <Menu isOpen={isOpen} />
+      
+      <Flex gap={4} display={{base: isOpen ? 'flex' :'nome', md: 'flex'}}>
+      <UserMenu />
+      <CheckoutButton />
+      </Flex>
+  
+
       <Flex gap='4'display={{base: isOpen ? 'flex' : 'none', md: 'flex'}}>
         <Button as={Link} href="/cadastro" variant="link" color='orange.500'>Crie sua conta</Button>
         <Button as={Link} href="/login" colorScheme='orange' color="black">Entrar</Button>
       </Flex>
+  
     </Flex>
     );
   }

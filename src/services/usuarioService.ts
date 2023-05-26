@@ -66,15 +66,9 @@ interface CreateUserResponse {
     message: string
 }
 
-export const createUser = (userForm : CreateUserForm) => {
-    return apiClient.post<CreateUserResponse>('/register', userForm,)
-}
 
 interface LoginResponse {
     message: string
     token: string
 }
 
-export const createLogin = <T> (userLogin: T ) =>{
-    return apiClient.post<LoginResponse>('/login', userLogin)
-}

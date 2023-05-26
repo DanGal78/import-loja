@@ -6,6 +6,7 @@ export interface Produto{
     descricao: string
     preco: number
     imagem: string
+    loja?: Loja
 }
 
 export function getProdutos(): Produto[] { 
@@ -42,10 +43,10 @@ export function getProdutos(): Produto[] {
 }
 
 export function getProduto(id: string): Produto | undefined {
-    return getProdutos().find((produtos) => produtos.id === id)
+    return getProdutos().find((produto) => produto.id === id)
 }
 export function updateProdutos<DataForm>
-(id: number | string, produtos: DataForm): Produto { 
+(id: number | string, produto: DataForm): Produto { 
     return{
         id: "1",
         nome: "Camiseta",
@@ -55,7 +56,7 @@ export function updateProdutos<DataForm>
     
     }
    }
-   export function createProduto<DataForm>(produtos: DataForm): Produto {
+   export function createProduto<DataForm>(produto: DataForm): Produto {
     return{
         id: "1",
         nome: "Camiseta",

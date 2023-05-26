@@ -12,7 +12,7 @@ interface CardDestaqueProps {
 }
 
 export const CardDestaqueProps: FC <CardDestaqueProps> = 
-({titulo, path, src,color,}) =>{
+({titulo, path, src, color}) =>{
     const [currentColor, setCurrentColor] = useState('')
     useEffect(() => {
         if(color === 'red') {

@@ -1,8 +1,6 @@
 import {  Link } from "@chakra-ui/next-js"
-import { Box, Flex, Heading, Image, Text, Icon, textDecoration} from "@chakra-ui/react"
+import { Flex, Heading, Image, Text, Icon, textDecoration} from "@chakra-ui/react"
 import { FC } from "react"
-import {FaStar} from 'react-icons/fa'
-
 import { Loja } from "@/services/lojasService"
 import { StarRating } from "@/components/StarRating"
 
@@ -13,7 +11,7 @@ interface CardLojaProps{
 
 export const CardLoja: FC<CardLojaProps> = ({
     path,
-    loja:    {nome, nota, tempo, taxaEntrega,categoria,  imageLogo}
+    loja:    {nome, nota, tempo, taxaEntrega, categoria,  imageLogo}
 }) => {
 
     const moneyFormatter = new Intl.NumberFormat('pt-br',{
@@ -25,9 +23,8 @@ export const CardLoja: FC<CardLojaProps> = ({
     href={path}
     padding={4} 
     bg="gray.100" 
-    borderRadius="7px" 
-    minW="550px"
-   
+    borderRadius="7px"     
+    minW="550px"   
     _hover={{
         transform:'scale(1.02)',
         boxShadow: "0 2px 8px rgba(0,0,0,0.4)",
