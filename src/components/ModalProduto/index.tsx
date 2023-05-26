@@ -45,7 +45,7 @@ export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
         addToCart({ quantidade, ...produto})
         handleClose()
     }
-    return <Modal isOpen={isOpen} onClose={handleClose} size="lg">
+    return <Modal isOpen={isOpen} onClose={handleClose} size="4xl">
         <ModalOverlay/>
         <ModalContent>
             <ModalHeader>

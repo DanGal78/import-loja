@@ -20,7 +20,7 @@ export const CardProdutoHorizontal: FC<CardProdutosProps> = ({
             <Stack>
                 <CardBody>
                     <Heading size="md">{nome}</Heading>
-                    <Text py={2}>{descricao}</Text>
+                    <Text py={2} noOfLines={3}>{descricao}</Text>
                 </CardBody>
                 <CardFooter>
                     <Text color="green.500">{formataMoeda(preco)}</Text>
