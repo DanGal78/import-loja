@@ -11,7 +11,7 @@ import { FaCreditCard, FaShoppingBasket, FaTrashAlt } from "react-icons/fa";
 
 export const CheckoutButton: FC = () => {
     const { quantidade, valor, produtos, removeFromCart} = useCart()
-    
+   
     return(
     <Popover>
     <PopoverTrigger>

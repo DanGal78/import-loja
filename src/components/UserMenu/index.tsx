@@ -16,9 +16,7 @@ export const UserMenu: FC = () => {
                         <MenuItem as={Link} href="/perfil" icon={<FaUsersCog/>}>
                             Perfil
                         </MenuItem>
-                        <MenuItem as={Link} href="/" icon={<FaCog/>}>
-                            Configurações
-                        </MenuItem>
+                       
                         <MenuItem 
                         as={Button} 
                         onClick={() => {

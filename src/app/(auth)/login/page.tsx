@@ -48,7 +48,7 @@ const validacaoLogin = yup.object().shape({
          <Flex 
              as="main" 
              minW="40vw" 
-             bg="black"
+             backgroundImage= "url('/explosao.avif')"
              color='white' 
              padding={8} 
              borderRadius="10px"

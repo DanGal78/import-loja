@@ -58,7 +58,7 @@ export default function Cadastro() {
     return (
         <Flex
             as="main"
-            bg="black"
+            backgroundImage= "url('/explosao.avif')"
             minW="40vw" 
             padding={8}
             color="white" 

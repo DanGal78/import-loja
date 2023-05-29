@@ -19,10 +19,10 @@ export const Header: FC<HeaderProps> = ({isOpen, onToggle}) => {
     <Flex 
     gap="10px"
     w="100%" 
-    wrap="wrap" 
+   
     justify="space-between" 
-    paddingX={8}
-    paddingY={0}
+    paddingX={20}
+    paddingY={2}
     align="center"
     position="fixed"
     transition="all 0.2s"
@@ -33,25 +33,13 @@ export const Header: FC<HeaderProps> = ({isOpen, onToggle}) => {
        
        <Link href="/">
         <Heading >
-           <Image w="25%" src="/ImportShop.png" alt="Imagem Logo import shop"/>
-        </Heading>
-       
-      </Link>
-
-     
-      <Menu isOpen={isOpen} />
-      
-      <Flex gap={4} display={{base: isOpen ? 'flex' :'nome', md: 'flex'}}>
-      <UserMenu />
-      <CheckoutButton />
-      </Flex>
-  
-
-      <Flex gap='4'display={{base: isOpen ? 'flex' : 'none', md: 'flex'}}>
-        <Button as={Link} href="/cadastro" variant="link" color='orange.500'>Crie sua conta</Button>
+           <Image w="25%" src="/Importlogo.png" alt="Imagem Logo import shop"/>               
+        </Heading>       
+      </Link>  
+      <Flex gap='4' display={{base: isOpen ? 'flex' : 'none', md: 'flex'}}>
+        <Button  as={Link} href="/cadastro" variant="link" color='orange.500' >Crie sua conta</Button>
         <Button as={Link} href="/login" colorScheme='orange' color="black">Entrar</Button>
-      </Flex>
-  
+      </Flex>  
     </Flex>
     );
   }

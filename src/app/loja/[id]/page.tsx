@@ -57,29 +57,10 @@ export default  function Loja({params: {id}}: LojaProps ) {
             />
     
         
-        <Flex align="center" gap={4} mt={2}>
-        <Image src={dadosLoja.imageLogo} alt={'Imagem logo empresa:'+ dadosLoja.nome} 
-            borderRadius="full"/>
-            <Heading fontSize="1.5rem">{dadosLoja.nome} </Heading>
-            <StarRating nota={dadosLoja.nota}/>
-            <Flex ml="auto" gap={5} >
-                <Button variant="link" colorScheme="red">Ver mais</Button>
-                <Text 
-                as="small" 
-                verticalAlign="center"
-                display="flex" 
-                alignItems="center" 
-                justifyContent="center"
-                gap="3px"> 
-                
-                <Icon as={AiFillDollarCircle}/>
-                    Pedido Mínimo{formataMoeda(dadosLoja.pedidoMinimo)}
-                </Text>
-            </Flex>
+        
        </Flex>
-       </Flex>
-       <Flex as="section" direction="column" grow={1} maxW="1200px" mt={2} >
-        <Heading fontSize="1rem">Destaques</Heading>
+       <Flex gap={5} as="section" direction="column" grow={1} maxW="1200px" mt={2} >
+        <Heading fontSize="1rem">Os mais vendidos</Heading>
         <Divider/>
         <Flex wrap="wrap" gap={6}>
         {produtos.map((produtos) =>(

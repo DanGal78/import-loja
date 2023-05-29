@@ -10,6 +10,7 @@ interface ModalProdutoPros{
     isOpen: boolean
     onClose: () => void
     id: string
+   
 }
 
 export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
@@ -65,18 +66,8 @@ export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
                         <StarRating nota={produto?.loja?.nota as number} />
                         </Flex>
                         <Divider />
-                        <Flex fontSize="12px" justify="space-between">
-                        <Text>{produto.loja.tempo}</Text>
-                        <Text color={
-                        produto.loja.taxaEntrega === 0
-                        ? 'gray.300'
-                        : 'blackAlpha.300'                 
-                    }>
-                        {produto.loja.taxaEntrega === 0
-                        ? 'Grátis'
-                        : formataMoeda(produto.loja.taxaEntrega)}
-                    </Text>
-                        </Flex>
+                        
+                        
                         </>
                         )}
                     </Flex>
@@ -103,7 +94,7 @@ export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
                         
                         />
                     </Flex>
-                    <Button variant="solid" colorScheme="red" onClick={handleAddToCart}>
+                    <Button variant="solid" colorScheme="orange" onClick={handleAddToCart}>
                         Adicinar {formataMoeda(produto?.preco * quantidade)}</Button>
                     </Flex>         
             </ModalFooter>

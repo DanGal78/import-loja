@@ -4,9 +4,7 @@ import { Button, Flex, FormControl, Heading, Icon, Input, InputGroup, InputLeftA
 import {GoSearch} from 'react-icons/go'
 import { useState } from "react";
 import { CardDestaqueProps } from "@/components/CardDestaque";
-
 import { listarLojas } from "@/services/lojasService";
-import { CardProdutos } from "@/components/CardProduto";
 import { CardLoja } from "@/components/CardLoja";
 
 
