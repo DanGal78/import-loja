@@ -1,3 +1,6 @@
+import { FormularioLoja } from "@/app/admin/loja/page"
+import { apiClient } from "@/config/axios"
+
 export interface Loja {
     id:string
     nome: string
@@ -8,45 +11,31 @@ export interface Loja {
     imageCover: string
 }
 
-export const listarLojas = () => {
-    return [
-        {
-        id: '1',
-        nome: 'Apple iPhone 14 Pro 128GB Preto-espacial 6,1” 48MP',
-        nota: 5.0,
-        categoria: 'iPhone',          
-        imageLogo: '/iphone14.png',
-        imageCover: 'https://picsum.photos/1200/250',
-        },
-        {
-        id: '2',
-        nome: 'Apple iPhone 14 Pro 256GB Roxo-profundo',
-        nota: 5.0,
-        categoria: 'iPhone', 
-        imageLogo: '/iphone14.png',
-        imageCover: 'https://picsum.photos/1200/250',
-        },
-        {
-        id: '3',
-        nome: 'Apple TV 4K (3ª geração) Wi-Fi + Ethernet 128GB',
-        nota: 4.7,
-        categoria: 'Apple TV 4K ',
-        imageLogo: '/tv4k.png',
-        imageCover: 'https://picsum.photos/1200/250',
-        },
-        {
-        id: '4',
-        nome: 'MacBook Air Apple',
-        nota: 4.9,
-        categoria: 'MacBook Air',
-        imageLogo: 'macbook.png',
-        imageCover: 'https://picsum.photos/1200/250',
-        },
-        ]
+export interface PaginatedLojas {
+    data: Loja[]
+  }
+
+  export const listarLojas = () => {
+    return apiClient.get<PaginatedLojas>('/lojas')
         
         
 }
 
 export const obterLoja = (id: string) => {
-    return listarLojas().find((loja) => loja.id === id)
+    return apiClient.get<Loja>(`/lojas/${id}`)
+}
+interface CadastraLojaDTO {
+    message: string
+}
+
+export const cadastrarLoja = (lojaData: FormularioLoja) => {
+    return apiClient.post<CadastraLojaDTO>('/lojas',lojaData)
+}
+
+export const apagarLoja = (id: string | number) => {
+    return apiClient.delete<CadastraLojaDTO>(`/lojas/${id}`)
+}
+
+export const atualizaLoja = (id: string | number, lojaData: Partial<FormularioLoja>) => {
+    return apiClient.put<CadastraLojaDTO>(`/lojas/${id}`, lojaData)
 }

@@ -1,5 +1,6 @@
 'use client'
 
+import { Footer } from "@/components/Footer";
 import { Input } from "@/components/Input";
 import { useCart } from "@/contexts/CartContext";
 import { formataMoeda } from "@/helpers/formataMoeda";
@@ -199,6 +200,9 @@ export default function PagamentoPage() {
                     </TabPanels>
                 </Tabs>
             </Flex>
+            <Footer/>
         </Flex>
+         
+       
     )
 }

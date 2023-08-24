@@ -11,7 +11,7 @@ interface CardDestaqueProps {
     
 }
 
-export const CardDestaqueProps: FC <CardDestaqueProps> = 
+export const CardDestaque: FC <CardDestaqueProps> = 
 ({titulo, path, src, color}) =>{
     const [currentColor, setCurrentColor] = useState('')
     useEffect(() => {
