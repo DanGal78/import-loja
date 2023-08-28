@@ -22,7 +22,7 @@ import { FormLojas } from "./FormLojas";
  export type FormularioLoja = {
     nome: string
     categoria: string
-    tempo: string
+   
     
     logo: any
     cover: any
@@ -170,7 +170,7 @@ export default function LojaIndex() {
                         <Tr key={loja.id}>
                             <Td>{loja.id}</Td>
                             <Td>{loja.nome}</Td>
-                            <Td>{loja.nota}</Td>
+                            
                             <Td>
                                 <Flex>
                                 <IconButton

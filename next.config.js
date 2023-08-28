@@ -1,9 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
-        appDir: true,        
+      appDir: true,
     },
-    asy
-}
-
-module.exports = nextConfig
+    async rewrites(){
+      return{
+        afterFiles: [
+          {
+            source: '/api/:path*',
+            destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
+          },
+        ],
+      }
+    },
+  }
+  
+  module.exports = nextConfig
+  

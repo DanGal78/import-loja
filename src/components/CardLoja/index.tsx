@@ -11,7 +11,7 @@ interface CardLojaProps{
 
 export const CardLoja: FC<CardLojaProps> = ({
     path,
-    loja:    {nome, nota, categoria,  imageLogo}
+    loja:    {nome,  categoria,  imageLogo}
 }) => {
 
     const moneyFormatter = new Intl.NumberFormat('pt-br',{
@@ -42,7 +42,7 @@ export const CardLoja: FC<CardLojaProps> = ({
             <Flex direction="column" gap={2}>
                 <Heading fontSize="1rem">{nome}</Heading>
                 <Flex gap={2} fontSize="0.9rem" color="blackAlpha.500">
-                    <StarRating nota={nota}></StarRating>
+                    
                     <Text as="span">•</Text>
                     <Text>{categoria}</Text>
                     <Text as="span">•</Text>                    

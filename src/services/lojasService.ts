@@ -1,22 +1,27 @@
-import { FormularioLoja } from "@/app/admin/loja/page"
-import { apiClient } from "@/config/axios"
-
+import { apiClient } from '@/config/axios';
+import { FormErrorMessage } from '@chakra-ui/react';
+import { Produto } from './produtoService';
+import { FormularioLoja } from '@/app/admin/lojas/page';
 export interface Loja {
-    id:string
+    id?:string
     nome: string
-    nota: number
+   
     categoria: string
-      
+    distancia?: string
+    tempo: string
+    taxaEntrega: number
+    pedidoMinimo: number
     imageLogo: string
     imageCover: string
+    produtos?: Produto[]
 }
 
-export interface PaginatedLojas {
+export interface PagitateLojas {
     data: Loja[]
-  }
+}
 
-  export const listarLojas = () => {
-    return apiClient.get<PaginatedLojas>('/lojas')
+export const listarLojas = () => {
+    return apiClient.get<PagitateLojas>('/lojas')
         
         
 }

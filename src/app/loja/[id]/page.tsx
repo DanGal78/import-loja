@@ -78,7 +78,7 @@ export default  function LojaPage({params: {id}}: LojaProps ) {
             borderRadius="full"
             />
             <Heading fontSize="1.5rem">{dadosLoja.nome} </Heading>
-            <StarRating nota={dadosLoja.nota}/>
+            
             <Flex ml="auto" gap={5} >
                 <Button variant="link" colorScheme="red">Ver mais</Button>
                 <Text 

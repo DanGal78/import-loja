@@ -1,4 +1,4 @@
-import { getProduto } from "@/services/produtoService"
+import { Produto, getProduto } from "@/services/produtoService"
 import { Button, Divider, Flex, IconButton, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text } from "@chakra-ui/react"
 import { FC, useEffect, useState } from "react"
 import { StarRating } from "../StarRating"
@@ -10,26 +10,25 @@ interface ModalProdutoPros{
     isOpen: boolean
     onClose: () => void
     id: string
-   
 }
 
 export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
 
     const [quantidade, setQuantidade] = useState(1)
     const { addToCart } = useCart()
+    const [produto, setProduto] = useState<Produto | null>(null)
+
     const handleClose = () => {
-        onClose()
-       
+        onClose()       
     }
+    useEffect(() => {
+        getProduto(id).then((response) => setProduto(response.data))
+    }, [id])
     useEffect(() =>{
                 setQuantidade(1)
             },[isOpen])
 
-    const produto = getProduto(id)
-        if (!produto) {
-            handleClose()
-            return null
-        }
+    
         
     const incrementa = () => {
         setQuantidade(quantidade + 1)
@@ -46,7 +45,7 @@ export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
         addToCart({ quantidade, ...produto})
         handleClose()
     }
-    return <Modal isOpen={isOpen} onClose={handleClose} size="4xl">
+    return <Modal isOpen={isOpen} onClose={handleClose} size="lg">
         <ModalOverlay/>
         <ModalContent>
             <ModalHeader>
@@ -55,7 +54,7 @@ export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
             </ModalHeader>
             <ModalBody>
                 <Flex grow={1} gap={2}>
-                    <Image src={produto?.imagem} alt={`Imagem do produto ${produto?.nome}`}/>
+                    <Image  height="150px" width="150px" objectFit="cover"src={produto?.imagem} alt={`Imagem do produto ${produto?.nome}`}/>
                     <Flex direction="column" grow={1}>
                         <Text>{produto?.descricao}</Text>
                         <Divider variant="dashed" />
@@ -63,11 +62,21 @@ export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
                             <>
                         <Flex justify="space-between" my={2}>
                         <Text>{produto?.loja?.nome}</Text>
-                        <StarRating nota={produto?.loja?.nota as number} />
+                        
                         </Flex>
                         <Divider />
-                        
-                        
+                        <Flex fontSize="12px" justify="space-between">
+                        <Text>{produto.loja.tempo}</Text>
+                        <Text color={
+                        produto.loja.taxaEntrega === 0
+                        ? 'gray.300'
+                        : 'blackAlpha.300'                 
+                    }>
+                        {produto.loja.taxaEntrega === 0
+                        ? 'Grátis'
+                        : formataMoeda(produto.loja.taxaEntrega)}
+                    </Text>
+                        </Flex>
                         </>
                         )}
                     </Flex>
@@ -94,7 +103,7 @@ export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
                         
                         />
                     </Flex>
-                    <Button variant="solid" colorScheme="orange" onClick={handleAddToCart}>
+                    <Button variant="solid" colorScheme="red" onClick={handleAddToCart}>
                         Adicinar {formataMoeda(produto?.preco * quantidade)}</Button>
                     </Flex>         
             </ModalFooter>
