@@ -62,9 +62,11 @@ export const ModalProduto : FC<ModalProdutoProps> = ({
     setValue, watch} = useForm<ProdutoForm>({
         resolver: yupResolver(validacaoProduto),
     })
-    const submitProduto = (data: ProdutoForm) =>{
+    const submitProduto = (data: ProdutoForm) =>{ 
+        console.log(data)
         if (produto) {
-            updateProdutos<ProdutoForm>(produto.id, data)
+
+            updateProdutos<ProdutoForm>(produto.id, data) 
             return
         }
         createProduto<ProdutoForm>(data)

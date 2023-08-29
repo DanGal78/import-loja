@@ -20,10 +20,10 @@ export interface Usuario {
     permissions?: string[]
 }
 interface CreateUserForm {    
-    nome: string
+    name: string
     email: string
-    senha: string
-    confirmaSenha: string
+    password: string
+    password_confirmation: string
 }
 
 export const obterUsuarios = (): Usuario[] => {
@@ -67,7 +67,7 @@ interface CreateUserResponse {
 }
 
 export const createUser = (userForm : CreateUserForm) => {
-    return apiClient.post<CreateUserResponse>('/auth/regista', userForm,)
+    return apiClient.post<CreateUserResponse>('/auth/registra', userForm,)
 }
 
 interface LoginResponse {

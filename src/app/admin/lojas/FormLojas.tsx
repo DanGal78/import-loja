@@ -101,19 +101,11 @@ export const FormLojas: FC<FormLojaProps>= ({
                 <Flex as="form" p={4} direction="column"gap={1} onSubmit={handleSubmit(handleSalvarLoja)}>
                     <Input label="Nome" type="text" id="nome" error={errors.nome} {...register('nome')} />
                     <Input label="Categoria" type="text" id="categoria" error={errors.categoria} {...register('categoria')}/>
-                    <Input label="Tempo de preparo" type="text" id="tempo" error={errors.tempo} {...register('tempo')}/>
+                   
                     
                    
-                    <Input label="Pedido mínimo" type="text" id="pedidoMinimo" error={errors.pedidoMinimo} {...register('pedidoMinimo')}
-                     onChange={({target}) =>{
-                        setValue('pedidoMinimo', formataMoeda(Number(target.value.replace(/\D/g, '')) /100),
-                        );
-                    }}/>
-                    <Input label="Taxa de entrega" type="text" id="taxaEntrega" error={errors.taxaEntrega} {...register('taxaEntrega')}
-                     onChange={({target}) =>{
-                        setValue('taxaEntrega', formataMoeda(Number(target.value.replace(/\D/g, '')) /100),
-                        );
-                    }}/>
+                   
+                    
                      <Input label="Logo" type="file" id="logo"  display={'none'}  {...register('logo')}/>
                     
                     <FormControl isInvalid={!!errors.logo}>

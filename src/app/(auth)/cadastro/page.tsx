@@ -6,9 +6,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { type } from 'os';
 import * as yup from 'yup'
 import { useForm } from "react-hook-form"
+import { createUser } from "@/services/usuarioService";
+import { notify } from '@/config/toast'
 
 const validacaoCadastro = yup.object().shape({
-    nome: yup
+    name: yup
         .string()
         .required('Você precisa informar o seu nome')
         .test({
@@ -25,35 +27,52 @@ const validacaoCadastro = yup.object().shape({
         .email('Você precisa informar um email válido')
         .required('Você precisa informar um e-mail'),
 
-    senha: yup
+    password: yup
         .string()
         .required('informe sua senha')
         .min(8, ' Sua senha precisa ter ao menos 8 caracteres.'),
 
-    confirmaSenha: yup
+    password_confirmation: yup
         .string()
         .required('Infome sua senha')
         .min(8, ' Sua senha precisa ter ao menos 8 caracteres.')
-        .oneOf([yup.ref('senha'), ''], 'As senhas não coincidem'),
+        .oneOf([yup.ref('password'), ''], 'As senhas não coincidem'),
 })
 
 type FormularioCadastro = {
-    nome: string
+    name: string
     email: string
-    senha: string
-    confirmaSenha: string
+    password: string
+    password_confirmation: string
 }
 
-export default function Cadastro() {
-    const { register, handleSubmit, formState: { isSubmitting, errors },
-    } = useForm<FormularioCadastro>({
-        resolver: yupResolver(validacaoCadastro),
+export default function Cadastro(){
+
+    const {register, handleSubmit, formState:{ isSubmitting, errors},
+        } = useForm<FormularioCadastro>({resolver:yupResolver(validacaoCadastro),
     });
+    
     const cadastraUsuario = async (dados: FormularioCadastro) => {
-        await new Promise((resolve) => {
-            setTimeout(() => resolve(dados), 3 * 1000)
-        })
+        try {
+            const resposta = await createUser(dados)
+           notify(resposta.data.message, 'success')
+           
+            setTimeout(() => {
+                            window.location.href = '/login'
+                            }, 2000)
+
+        } catch (e: any){
+           if (typeof e.message !== 'undefined'){
+            const {
+                data: { message },
+                }  = e.response
+                notify(message, 'error')
+                return
+            }
+                notify('Um erro inesperado aconteceu', 'error')            
+        }        
     }
+
 
     return (
         <Flex
@@ -84,8 +103,8 @@ export default function Cadastro() {
                     id="nome"
                     type="text"
                     placeholder="Seu nome"
-                    {...register('nome')}
-                    error={errors.nome}
+                    {...register('name')}
+                    error={errors.name}
                 />
                 <Input
                     label="Email"
@@ -99,15 +118,15 @@ export default function Cadastro() {
                     id="senha"
                     type="password"
                     label="Senha"
-                    {...register('senha')}
-                    error={errors.senha}
+                    {...register('password')}
+                    error={errors.password}
                 />
                 <Input
                     label="Confirme sua Senha"
                     id="confirme-senha"
                     type="password"
-                    {...register('confirmaSenha')}
-                    error={errors.confirmaSenha}
+                    {...register('password_confirmation')}
+                    error={errors.password_confirmation}
                 />
                 <Button type="submit" isLoading={isSubmitting} colorScheme="orange">Cadastrar</Button>
             </Flex>

@@ -21,7 +21,10 @@ export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
     const handleClose = () => {
         onClose()       
     }
+
     useEffect(() => {
+        if (!isOpen) return
+        
         getProduto(id).then((response) => setProduto(response.data))
     }, [id])
     useEffect(() =>{
