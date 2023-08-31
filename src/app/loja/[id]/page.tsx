@@ -80,7 +80,7 @@ export default  function LojaPage({params: {id}}: LojaProps ) {
             <Heading fontSize="1.5rem">{dadosLoja.nome} </Heading>
             
             <Flex ml="auto" gap={5} >
-                <Button variant="link" colorScheme="red">Ver mais</Button>
+               
                 <Text 
                 as="small" 
                 verticalAlign="center"
@@ -89,8 +89,8 @@ export default  function LojaPage({params: {id}}: LojaProps ) {
                 justifyContent="center"
                 gap="3px"> 
                 
-                <Icon as={AiFillDollarCircle}/>
-                    Pedido Mínimo{formataMoeda(dadosLoja.pedidoMinimo)}
+               
+                    
                 </Text>
             </Flex>
        </Flex>

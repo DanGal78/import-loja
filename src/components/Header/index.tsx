@@ -5,6 +5,7 @@ import { Menu } from '../Menu'
 import { useAuth } from '@/contexts/AuthContext';
 import { UserMenu } from '../UserMenu';
 import { CheckoutButton } from '../CheckoutButton';
+import { MenuToggle } from '../Menu/MenuToggle';
 
 
 
@@ -15,6 +16,7 @@ interface HeaderProps {
     onToggle:() => void
 }
 export const Header: FC<HeaderProps> = ({isOpen, onToggle}) => {
+  const {isLogged} = useAuth()
     return (
     <Flex 
     gap="10px"
@@ -30,16 +32,28 @@ export const Header: FC<HeaderProps> = ({isOpen, onToggle}) => {
     bg="black"
     zIndex="9999"
     >
-       
+       <MenuToggle isOpen={isOpen} onToggle={onToggle}/>
+     <Link href="/"></Link>
        <Link href="/">
         <Heading >
            <Image w="25%" src="/Importlogo.png" alt="Imagem Logo import shop"/>               
         </Heading>       
-      </Link>  
+      </Link> 
+
+      <Menu isOpen={isOpen} />
+    { isLogged ? (
+      <Flex gap={4} display={{base: isOpen ? 'flex' :'nome', md: 'flex'}}>
+      <UserMenu />
+      <CheckoutButton />
+      </Flex>
+    ) :(
+       
+
       <Flex gap='4' display={{base: isOpen ? 'flex' : 'none', md: 'flex'}}>
         <Button  as={Link} href="/cadastro" variant="link" color='orange.500' >Crie sua conta</Button>
         <Button as={Link} href="/login" colorScheme='orange' color="black">Entrar</Button>
       </Flex>  
+    )}
     </Flex>
-    );
+    )
   }

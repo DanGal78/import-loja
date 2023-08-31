@@ -8,6 +8,8 @@ import * as yup from 'yup'
 import { yupResolver } from "@hookform/resolvers/yup"
 import { formataMoeda } from "@/helpers/formataMoeda"
 import { watch } from "fs"
+import { imageOptimizer } from "next/dist/server/image-optimizer"
+import { getBase64 } from "@/helpers/getBase64"
 
 
 
@@ -40,7 +42,7 @@ const validacaoProduto = yup.object().shape({
 interface ModalProdutoProps {
     isOpen: boolean
     onClose: () => void
-    produto?: Produto
+    produto?: Produto | null
     lojas: Loja[]
 
 }
@@ -50,7 +52,7 @@ interface ProdutoForm {
     preco: number | string
     desconto: number  | string
     loja_id: string | number;
-    imagens: FileList
+    imagens: FileList | string[]
 }
 export const ModalProduto : FC<ModalProdutoProps> = ({
     isOpen,
@@ -58,18 +60,26 @@ export const ModalProduto : FC<ModalProdutoProps> = ({
     lojas,
     produto
 }) => {
-    const { register, handleSubmit, formState:{errors, isSubmitting}, 
+    const { register, reset, handleSubmit, formState:{errors, isSubmitting}, 
     setValue, watch} = useForm<ProdutoForm>({
         resolver: yupResolver(validacaoProduto),
     })
-    const submitProduto = (data: ProdutoForm) =>{ 
-        console.log(data)
-        if (produto) {
+    const submitProduto = async(data: ProdutoForm) =>{ 
 
+        const imagens = []
+        for (let i = 0; i < data.imagens.length; i++) {
+            imagens.push(await getBase64(data.imagens[i] as File))
+
+        }
+        data.imagens = imagens
+        
+        if (produto) {
             updateProdutos<ProdutoForm>(produto.id, data) 
             return
         }
         createProduto<ProdutoForm>(data)
+        onClose()
+        reset()
     }
     return(
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -149,7 +159,7 @@ export const ModalProduto : FC<ModalProdutoProps> = ({
                                     return (
                                         <Image
                                         maxW="100px"
-                                        alt="Preview de imagagem"
+                                        alt="Preview de imagem"
                                         key={index}
                                         src={URL.createObjectURL(watch('imagens').item(index) as File,)}
                                         />

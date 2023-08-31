@@ -10,11 +10,12 @@ import * as yup from 'yup'
 import { FormularioLoja } from './page'
 import { Loja } from "@/services/lojasService";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { getBase64 } from "@/helpers/getBase64";
 
 const validacaoLoja = yup.object().shape({
     nome: yup.string().required('Informe o nome da loja.'),
     categoria: yup.string().required('Informe o categoria da loja.'),
-    tempo: yup.string().required('Informe o tempo de preparo.'),
+    
     
     logo: yup.mixed().test('type','Envie uma imagem mo formato JPG ou PNG',(value: any) =>{
         if(value.length > 0) {
@@ -28,34 +29,7 @@ const validacaoLoja = yup.object().shape({
         }
         return false
     }) .required('Informe a capa da loja.'),
-    pedidoMinimo: yup
-    .string()
-    .transform((value: string) => {
-        if (!value) return '0'
-        return (Number(value.replace(/\D/g, '')) / 100).toString()
-    })
-    .test({
-        name: 'pedido-minimo',
-        message: 'O pedido mínimo deve ser maior ou igual a R$ 0,0',
-        test: (value) => {
-            if (!value) return false
-            return Number(value) >= 0
-        }
-    }),
-    taxaEntrega: yup
-    .string()
-    .transform((value: string) => {
-        if (!value) return '0'
-        return (Number(value.replace(/\D/g, '')) / 100).toString()
-    })
-    .test({
-        name: 'taxa-entrega',
-        message: 'O valor da taxa de entrega deve ser maior ou igual a R$ 0,0',
-        test: (value) => {
-            if (!value) return false
-            return Number(value) >= 0
-        }
-    })
+    
 
 })
 
@@ -73,19 +47,31 @@ export const FormLojas: FC<FormLojaProps>= ({
     salvarLoja,
     loja,
 }) => {
-    const lojaData: FormularioLoja = {...loja, cover: '',logo: ''}
+    const lojaData: FormularioLoja = {...loja}
     const { 
         register, 
         handleSubmit, 
         formState:{errors}, 
-        setValue, watch, 
-        reset
+        setValue, 
+        getValues,
+        watch, 
+        reset,
     } = useForm<FormularioLoja>({
         resolver: yupResolver(validacaoLoja),
         defaultValues: lojaData,
     })
 
-    const handleSalvarLoja = (loja: FormularioLoja) => {
+    const handleSalvarLoja = async (loja: FormularioLoja) => {
+        const coverBase64 = getValues('cover')
+        ? await getBase64(getValues('cover')[0])
+        : ''
+        const logoBase64 = getValues('logo')
+        ? await getBase64(getValues('logo')[0])
+        : ''
+        loja.cover = coverBase64
+        loja.logo = logoBase64 
+        await getBase64(watch('cover')[0])  
+
         salvarLoja(loja)
         reset()
     }
@@ -100,13 +86,9 @@ export const FormLojas: FC<FormLojaProps>= ({
             <ModalBody>
                 <Flex as="form" p={4} direction="column"gap={1} onSubmit={handleSubmit(handleSalvarLoja)}>
                     <Input label="Nome" type="text" id="nome" error={errors.nome} {...register('nome')} />
-                    <Input label="Categoria" type="text" id="categoria" error={errors.categoria} {...register('categoria')}/>
-                   
-                    
-                   
-                   
-                    
-                     <Input label="Logo" type="file" id="logo"  display={'none'}  {...register('logo')}/>
+                    <Input label="Categoria" type="text" id="categoria" error={errors.categoria} {...register('categoria')}/>    
+                                                
+                    <Input label="Logo" type="file" id="logo"  display={'none'}  {...register('logo')}/>
                     
                     <FormControl isInvalid={!!errors.logo}>
                     <FormLabel htmlFor="logo">

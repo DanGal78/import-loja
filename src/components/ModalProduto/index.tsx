@@ -24,7 +24,7 @@ export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
 
     useEffect(() => {
         if (!isOpen) return
-        
+
         getProduto(id).then((response) => setProduto(response.data))
     }, [id])
     useEffect(() =>{
@@ -45,7 +45,7 @@ export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
     
 
     const handleAddToCart = () =>{
-        addToCart({ quantidade, ...produto})
+        addToCart({ quantidade, ...produto}) 
         handleClose()
     }
     return <Modal isOpen={isOpen} onClose={handleClose} size="lg">
@@ -69,16 +69,7 @@ export const ModalProduto: FC<ModalProdutoPros> = ({isOpen, onClose, id}) => {
                         </Flex>
                         <Divider />
                         <Flex fontSize="12px" justify="space-between">
-                        <Text>{produto.loja.tempo}</Text>
-                        <Text color={
-                        produto.loja.taxaEntrega === 0
-                        ? 'gray.300'
-                        : 'blackAlpha.300'                 
-                    }>
-                        {produto.loja.taxaEntrega === 0
-                        ? 'Grátis'
-                        : formataMoeda(produto.loja.taxaEntrega)}
-                    </Text>
+                        
                         </Flex>
                         </>
                         )}

@@ -26,8 +26,7 @@ import { FormLojas } from "./FormLojas";
     
     logo: any
     cover: any
-    pedidoMinimo: string | number
-    taxaEntrega: string | number
+    
 }
 export default function LojaIndex() {
     
@@ -56,27 +55,17 @@ export default function LojaIndex() {
         setLoja(loja)
         onOpen()
     }
-    const updateLoja = async ({
-        logo,
-        cover,
-        pedidoMinimo,
-        taxaEntrega,
+    const updateLoja = async ({              
         ...resto
     }: FormularioLoja) => {
-        const imageLogo = logo[0] ? await getBase64(logo[0]) : undefined
-        const imageCover = cover[0]? await getBase64(cover[0]) : undefined
+        
 
 
         const lojaData: Partial<FormularioLoja> = {
             ...resto,
-            logo: imageLogo,
-            cover: imageCover,
-            pedidoMinimo: Number(`${pedidoMinimo}`.replace(/\D/g, '')) /100,
-            taxaEntrega: Number(`${taxaEntrega}`.replace(/\D/g, '')) /100,
+            
         }
-        if (!imageLogo) delete lojaData.logo
-        if (!imageCover) delete lojaData.cover
-        try{
+        try {
             const {data} =  await atualizaLoja(loja?.id || '', lojaData)
             notify(data.message, 'success')
             onClose()
@@ -99,36 +88,19 @@ export default function LojaIndex() {
     }
     
 
-    const salvarLoja =  async({logo, cover, pedidoMinimo, taxaEntrega,...resto}: FormularioLoja) => {
-        
+    const salvarLoja =  async({ ...resto}: FormularioLoja) => {      
        
-
         const submitData: FormularioLoja = {
             ...resto,
             cover: "",
             logo: "",           
-            pedidoMinimo: Number(`${pedidoMinimo}`.replace(/\D/g, '')) /100,
-            taxaEntrega: Number(`${taxaEntrega}`.replace(/\D/g, '')) /100,
-        
-        }
-        if (logo[0]) {
-            submitData.logo = await getBase64(logo[0])
-        }else {
-            delete submitData.logo
-        }
-        if (cover[0]) {
-            submitData.cover = await getBase64(cover[0])
-        }else {
-            delete submitData.cover
-        }
-
             
-
+        }    
+             
        try {
         const response = await cadastrarLoja(submitData)
         notify(response.data.message, 'success')
-        onClose()
-       
+        onClose()       
         queryClient.invalidateQueries({ queryKey: ['lojas', 'adm']})
        } catch (e: any) {
         if(e.response) {

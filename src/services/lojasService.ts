@@ -4,13 +4,8 @@ import { Produto } from './produtoService';
 import { FormularioLoja } from '@/app/admin/lojas/page';
 export interface Loja {
     id?:string
-    nome: string
-   
-    categoria: string
-    distancia?: string
-    tempo: string
-    taxaEntrega: number
-    pedidoMinimo: number
+    nome: string   
+    categoria: string       
     imageLogo: string
     imageCover: string
     produtos?: Produto[]
@@ -21,8 +16,7 @@ export interface PagitateLojas {
 }
 
 export const listarLojas = () => {
-    return apiClient.get<PagitateLojas>('/lojas')
-        
+    return apiClient.get<PagitateLojas>('/lojas')        
         
 }
 

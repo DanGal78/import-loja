@@ -19,7 +19,7 @@ export default function Page() {
   <Flex direction="column" align="center" grow={1}>
     <Flex as="hgroup" direction="column" align="center">
       <Heading as="h1" fontSize="2.25rem">Tudo pra facilitar seu dia a dia</Heading>
-      <Heading as="h2" fontSize="1rem" color="blackAlpha.400">O que você precisa está aqui. Peça a receba onde estiver </Heading>
+      <Heading as="h2" fontSize="1rem" color="blackAlpha.400">O que você precisa está aqui. </Heading>
     </Flex>
     <Flex as="section" w="100%">
       <FormControl flexDirection="row" display="flex" gap={4} marginX="48" marginTop="4">
@@ -31,15 +31,15 @@ export default function Page() {
         borderRadius="none"
         />
         </InputGroup>
-          <Button colorScheme="red" borderRadius="none">Buscar</Button>
+          <Button colorScheme="orange" borderRadius="none">Buscar</Button>
       </FormControl>
     </Flex>
     <Flex as="section" mt={10} gap={4}>
-    <CardDestaque src='/restaurant.avif' path='/' titulo='Restaurante' color='red'/>
-      <CardDestaque src='/market.avif' path='/' titulo='Compras' color='green'/>
+    <CardDestaque src='/bombox.png' path='/' titulo='Caixa Bluetooth' color='red'/>
+      <CardDestaque src='/iphone14.png' path='/' titulo='Smartphones' color='green'/>
     </Flex>
     <Flex as="section"  maxW="90vw" marginLeft="5vw"  direction={'column'} >
-      <Heading fontSize="1.25rem">Lojas</Heading>
+      <Heading fontSize="1.25rem">Marcas</Heading>
       <Flex gap={8} mt={2} wrap="wrap" align="center"  >
         {isLoading ? <Spinner size="md"/> 
         : isError ? <Text>Ocorreu um erro</Text> 

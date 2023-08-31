@@ -33,3 +33,6 @@ export interface Produto{
        export function createProduto<DataForm>(produto: DataForm) {
         return apiClient.post('/produtos', produto)
        }
+         export function deleteProduto(id: string | number) {
+        return apiClient.delete(`/produtos/${id}`)
+        }

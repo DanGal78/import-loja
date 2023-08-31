@@ -3,22 +3,20 @@ import { db } from '../database'
 export interface Loja {
   id: number
   nome: string
-  nota: number
+  
   categoria: string
-  tempo: string
-  taxaEntrega: number
-  pedidoMinimo: number
+ 
+  
   imageLogo: string
   imageCover: string
 }
 
 interface CreateLoja {
   nome: string
-  nota: number
+  
   categoria: string
-  tempo: string
-  taxaEntrega: number
-  pedidoMinimo: number
+  
+  
   imageLogo: string
   imageCover: string
 }
@@ -57,11 +55,9 @@ export const createLoja = (loja: CreateLoja) => {
       'INSERT INTO lojas (nome, nota, categoria, tempo, taxa_entrega, pedido_minimo, image_logo, image_cover) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
       [
         loja.nome,
-        loja.nota,
+      
         loja.categoria,
-        loja.tempo,
-        loja.taxaEntrega,
-        loja.pedidoMinimo,
+       
         loja.imageLogo,
         loja.imageCover,
       ],
@@ -82,11 +78,9 @@ export const updateLoja = (id: number | string, loja: Partial<CreateLoja>) => {
       'UPDATE lojas SET nome = ?, nota = ?, categoria = ?, tempo = ?, taxa_entrega = ?, pedido_minimo = ?, image_logo = ?, image_cover = ? WHERE id = ?',
       [
         loja.nome,
-        loja.nota,
+        
         loja.categoria,
-        loja.tempo,
-        loja.taxaEntrega,
-        loja.pedidoMinimo,
+       
         loja.imageLogo,
         loja.imageCover,
         id,

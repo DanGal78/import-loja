@@ -28,6 +28,8 @@ export const CardDestaque: FC <CardDestaqueProps> =
         <Flex bg={currentColor} 
         borderRadius="2px"
          textAlign="center" 
+            w="600px"
+            h="300px"
          color="black" 
          align="center" 
          justify="center" 
@@ -45,7 +47,7 @@ export const CardDestaque: FC <CardDestaqueProps> =
             marginTop={4}
             color="black"
             >
-                Vários Modelos
+                As melhores Marcas
                 </Button>
                     <Image src={src} alt="Imagem do card" maxH={210}/>
                 </Flex>
